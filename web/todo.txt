@@ -1,0 +1,32 @@
+Load login page.
+
+Fetch + store form email
+Fetch + store form password
+
+Send email and password to /login API
+
+Store /Login API response
+Store msg
+Store user_id
+
+Send user_id to /get_patients API
+Store msg
+Store Array of patientIds
+
+For one patientId in patientIdArray:
+Send patientId
+Store 
+
+
+////////Visualization
+
+Total force over time: Sensor1 + Sensor2 vs Timestamp Linegraph
+
+///////////////////
+
+Colors
+Purple: #d558e2
+Blue: #3abdff
+Grey: #e9ecef
+icon purple: C837D4
+

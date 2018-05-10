@@ -1,0 +1,138 @@
+body,html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+}
+
+.min-100 {
+  min-height: 100vh;
+}
+
+.min-90 {
+  min-height: 90vh;
+}
+
+.min-10 {
+  min-height: 10vh;
+}
+
+#login {
+  background-color: #f8f9fa;
+}
+
+#leftnav .nav-link.active,
+#leftnav .nav-link:hover,
+#leftnavu .nav-link:focus{
+  color: #111;
+  border-bottom: 1px #000 solid;
+  border-top: 1px #000 solid;
+  text-align: center;
+}
+
+#leftnav {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #e9ecef;
+  text-align: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#rightpanel {
+  width: 100%;
+  height: 100%;
+  position: static;
+  background: white;
+  margin-right:0;
+}
+
+#patientwell {
+  margin-top: 30px;
+  height: 10vh;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border:15px solid #e9ecef;
+  border-radius: 7px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#kpiwell {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 10vh;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border:15px solid #e9ecef;
+  border-radius: 7px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#sensordata {
+  display: inline-flex !important;
+
+}
+
+#content .nav-link{
+  font-size: 20px;
+}
+
+.nav-pills .nav-link.active, .nav-pills 
+.show>.nav-link {
+  color: white !important;
+  background-color: #C837D4;
+}
+
+#tabnav {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+
+#dashboard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  background: white;
+}
+
+#graphpane {
+  border:15px solid #e9ecef;
+  border-radius: 7px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* max-height: 50% */
+}
+
+#linechart {
+  max-height: 60vh;
+}
+
+#averagechart {
+  max-height: 60vh;
+}
+
+#livepane {
+  border:15px solid #e9ecef;
+  border-radius: 7px;
+  box-shadow: 7px 7px 5px grey;
+}
+
+
+.anchor{
+display: block;
+height: 70px;
+margin-top: -70px;
+visibility: hidden;
+}
+
+#content .nav-link {
+  color: #555;
+  transition: all 0.2 ease;
+}

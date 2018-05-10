@@ -1,0 +1,226 @@
+<div class="container-fluid" id="content">
+<div class="row">
+    <div class="container-fluid col-1 py-5" id="leftnav">
+        <img src="/logo" style="max-width: 100%; padding-bottom:40px;">
+        <br>
+        <br>
+        {{!-- <button class="btn btn-outline-secondary btn-md" type="submit">Profile</button>
+        <br>
+        <br>
+        <button class="btn btn-outline-secondary btn-md" type="submit">Patients</button> --}}
+        <p class="lead" style="font-size: 25px; color: #2a7ba3" >Welcome Doctor!</p>
+        <br>
+        <br>
+        <p class="lead" style="font-size: 25px; color: #2a7ba3" >Notifications</p>
+        <p class="lead" style="font-size: 20px; color: #2a7ba3" >0</p>
+        <br>
+        <br>
+        <form action="/logout" method="post" role="form" enctype="application/x-www-form-urlencoded">
+            <button class="btn btn-outline-secondary btn-md" type="submit">Log Out</button>
+        </form>
+    </div>
+    <div class="container-fluid col-11" id="rightpanel">
+        <div class="col-12" id="patientwell">
+            <img src="/ianpic" style="max-height: 80%; padding-right: 10px;">
+            <h3 class="lead" style="padding-right: 50px; font-size: 30px" >Ian Hipschman</h3>
+            <img src="/calendar" style="max-height: 70%; padding-right: 15px;">
+            <h3 class="lead" style="padding-right: 50px; font-size: 30px">Days Recovering: 75</h3>
+            <img src="/clock" style="max-height: 70%; padding-right: 15px;">
+            <h3 class="lead" style="padding-right: 5px; font-size: 30px">Next Appointment: 5/2/18</h3>
+            
+        </div>
+        <div class="container-fluid py-4" id="dashboard">
+            <ul class="nav nav-pills mb-3 pillstyle nav-justified" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active lead" id="pills-graph1-tab" data-toggle="pill" href="#tab1" role="tab" aria-controls="pills-graph1" aria-selected="true">Medial vs Lateral</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link lead" id="pills-graph2-tab" data-toggle="pill" href="#tab2" role="tab" aria-controls="pills-graph2" aria-selected="false">Average Loading</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="pills-graph1-tab">
+                    <!-- GRAPHS -->
+                    <div class="container-fluid hoverable" style="max-width:100%" id="graphpane">
+                        <canvas class="panel-body" id="linechart"></canvas>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="pills-graph2-tab">
+                    <!-- GRAPHS -->
+                    <div class="container-fluid hoverable" style="max-width:100%" id="graphpane">
+                        <canvas class="panel-body" id="averagechart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12" id="sensordata">
+                <div class="col-5" id="kpiwell" style="margin-left: 120px; margin-right: 60px">
+                    <p class="display-3 text" style="padding-right:10px; color: #2a7ba3" id="s1">NA</p>
+                    <p class="lead" style="font-size: 30px; color: #2a7ba3" >Medial Load Ratio</p>
+                </div>
+                <div class="col-5" id="kpiwell">
+                    <p class="display-3 text" style="padding-right:10px; color: #d558e2" id="s2">NA</p>
+                    <p class="lead" style="font-size: 30px; color: #d558e2" >Lateral Load Ratio</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+    var sensor1 = [2, 4, 3, 8];
+    var sensor2 = [3, 3, 5, 6];
+    var timestamps = ['1:20', '1:21', '1:22', '1:23'];
+    var avg = [2, 3, 5, 8]
+
+    var sensorData = {
+        labels: timestamps,
+        datasets: [{
+            label: "Medial Load",
+            data: sensor1,
+            borderColor: "#3e95cd",
+            fill: false,
+            pointRadius: 10,
+            pointBackgroundColor: "#3e95cd",
+            pointHoverRadius: 13,
+            pointHoverBackgroundColor: "#6c757d",
+        }, {
+            label: "Lateral Load",
+            data: sensor2,
+            borderColor: "#d558e2",
+            fill: false,
+            pointRadius: 10,
+            pointBackgroundColor: "#d558e2",
+            pointHoverRadius: 13,
+            pointHoverBackgroundColor: "#6c757d"
+        }]
+    };
+
+    var ctx = document.getElementById('linechart').getContext('2d');
+    var liveChart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+        data: sensorData,
+        options: {
+            responsive: true
+        }
+    });
+
+    var avgData = {
+        labels: timestamps,
+        datasets: [{
+            label: "Loading Average",
+            data: avg,
+            borderColor: "#3e95cd",
+            fill: false,
+            pointRadius: 10,
+            pointBackgroundColor: "#3e95cd",
+            pointHoverRadius: 13,
+            pointHoverBackgroundColor: "#6c757d",
+        }]
+    };
+
+    var ctx = document.getElementById('averagechart').getContext('2d');
+    var avgChart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+        data: avgData,
+        options: {
+            responsive: true
+        }
+    });
+
+
+    //called when patient selected, open websockets and send id of patient chosen
+    function chose_patient()
+    {
+        document.getElementById("sensordata").style.display="block"; 
+
+        window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+        var connection = new WebSocket('wss://orthoinsights.herokuapp.com');
+
+        //var patient = "5a96e2d22d936a0014a36655";
+        connection.onopen = function () {
+            console.log("Open")
+            var setAgeRequest = {message_type:"set_id", user: "5a96e2d22d936a0014a36655" };
+            connection.send(JSON.stringify(setAgeRequest));
+
+            // connection is opened and ready to use
+        };
+
+        connection.onerror = function (error) {
+            // an error occurred when sending/receiving data
+        };
+
+        connection.onmessage = function (message) {
+            // try to decode json (I assume that each message
+            // from server is json)
+            console.log(message);
+            try {
+                var json = JSON.parse(message.data);
+                let s1 = Number(json.sensor1);
+                let s2 = Number(json.sensor2);
+                let ts = json.timestamp;
+                console.log(s1, s2, ts);
+
+                let newavg = (s1+s2/2);
+
+                let medialRatio = Math.round(s1/(s1+s2)*100);
+                let lateralRatio = Math.round((s2/(s1+s2))*100);
+                console.log(s1+s2);
+                console.log(medialRatio);
+                console.log(lateralRatio);
+                console.log(newavg + "NA");
+        
+                //document.getElementById("data_to_show").innerHTML = "Sensor1: " + s1 + "<br />Sensor 2: " + s2 +"<br />Time: " + timestamp
+                document.getElementById("s1").innerHTML = medialRatio;
+                document.getElementById("s2").innerHTML = lateralRatio;
+                console.log('CHECK 1');
+                //linechart.addData(s1, ts);
+
+                console.log('CHECK 2');
+
+                console.log('CHECK 3');
+
+                function removeData(){
+                    //Remove Last Points
+                    timestamps.shift();
+                    sensor1.shift();
+                    sensor2.shift();
+                    avg.shift();
+                    liveChart.update();
+                    avgChart.update();
+                }
+                removeData();
+
+                function addData() {
+                    //Add Live Point
+                    timestamps.push(ts);
+                    sensor1.push(s1);
+                    sensor2.push(s2);
+                    avg.push(newavg);
+
+                    liveChart.update();
+                    avgChart.update();
+                    console.log('CHECK 3.5');
+                };
+                console.log('CHECK 4');
+                addData();
+                console.log('CHECK 5');
+                
+            } catch (e) {
+                console.log('This doesn\'t look like a valid JSON: ', message.data);
+                return;
+            };
+            // handle incoming message
+            console.log('CHECK 6');
+            console.log('CHECK 7');
+        };
+    };
+
+    chose_patient();
+</script>
+
