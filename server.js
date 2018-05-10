@@ -77,11 +77,10 @@ app.get('/data',function(req, res){
     res.sendFile(public + 'js/data.js');
 });
 
+var port = process.env.PORT || 3000;
 
-// app.listen(5000,function(){
-//     console.log("Server running at Port 5000");
-// });
-
-var port = process.env.PORT || 5000;
+app.listen(port, "0.0.0.0", function() {
+    console.log("Listening on Port 3000");
+});
 
 module.exports = app;
