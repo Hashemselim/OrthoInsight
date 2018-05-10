@@ -108,18 +108,6 @@ router.post('/', function(req, res, next) {
                         sensor2: data.sensor2Min,
                         timestamp: data.timestampMin
                     };
-
-                    // var dashboardBody = {
-                    //     email: userEmail,
-                    //     password: userPassword,
-                    //     loginMsg: loginMsg,
-                    //     userId: userId,
-                    //     patientIdArray: patientIdArray,
-                    //     patientId: patientId,
-                    //     sensor1: sensor1.slice(1,10),
-                    //     sensor2: sensor2.slice(1,10),
-                    //     timestamp: timestamp.slice(1,10)
-                    // };
         
                     if (loginMsg == "success"){
                         res.render('dashboard', dashboardBody);

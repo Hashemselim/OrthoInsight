@@ -44,7 +44,6 @@ router.post('/', function(req, res, next) {
         console.log("Patient Ids: ", patientIdArray);
 
         // Get All Points for each patient-------------------------------------------------------------------------------------
-        // for (var i = 0, patientId; i < patientIdArray.length; i++) {
             var patientId = patientIdArray[0];
 
             var getAllPointsApi = {
@@ -101,13 +100,6 @@ router.post('/', function(req, res, next) {
                     
                     res.render('dashboard', dashboardBody);
 
-                    // if (loginMsg == "success"){
-                    //     res.render('dashboard', dashboardBody);
-                    //     console.log("Login Successful: ", loginMsg);
-                    // } else{
-                    //     res.render('login',{loginFail: true});
-                    //     console.log("Login Failed: ", loginMsg);
-                    // };
                 });
             });
 
@@ -118,28 +110,8 @@ router.post('/', function(req, res, next) {
     // END Get Login-------------------------------------------------------------------------------------
 });
 
-// router.post('/login', function(req, res, next){
-
-//     var dashboardBody = {
-//         email: res.locals.userEmail,
-//         password: res.locals.userPassword,
-//         loginMsg: res.locals.loginMsg,
-//         user_id: res.locals.user_id,
-//         patientMsg: res.locals.patientMsg,
-//         patientIdArray: res.locals.patientIdArray,
-//         patientId: res.locals.patientId,
-//         sensor1: res.locals.sensor1,
-//         sensor2: res.locals.sensor2,
-//         timestamp: res.locals.timestamp
-//     };
-    
-//     if (res.locals.loginMsg == "success"){
-//         res.render('dashboard', dashboardBody);
-//         console.log("Login Successful: ", loginMsg);
-//     } else{
-//         res.render('login',{loginFail: true});
-//         console.log("Login Failed: ", loginMsg);
-//     };
-// });
+app.get("/login", (req, res) => {
+    res.render("login");
+});
 
 module.exports = router;
