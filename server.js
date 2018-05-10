@@ -82,6 +82,6 @@ app.get('/data',function(req, res){
 //     console.log("Server running at Port 5000");
 // });
 
-app.set('port', (process.env.PORT || 5000));
+var port = process.env.PORT || 5000;
 
 module.exports = app;
