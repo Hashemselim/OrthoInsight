@@ -32,7 +32,7 @@ app.get('/css',function(req, res){
 });
 
 app.get('/logo',function(req, res){
-    res.sendFile(public + 'img/Orthoinsight.png');
+    res.sendFile(public + 'img/OrthoInsight.png');
 });
 
 app.get('/ianpic',function(req, res){
